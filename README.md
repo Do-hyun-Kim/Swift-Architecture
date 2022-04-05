@@ -112,3 +112,133 @@ PlaygroundPage.current.liveView = MyViewController()
 
 ```
 
+- <H5>MVP Custom</H5>
+```swift
+//
+//  ViewController.swift
+//  MVP
+//
+//  Created by Kim dohyun on 2022/04/05.
+//
+
+import UIKit
+
+
+//MARK: Model
+struct Model {
+    var data: String
+    var value: String
+}
+
+
+protocol PresenterView: AnyObject {
+    func setLabelUI(_ label: String)
+    func setButtonUI(_ text: String)
+}
+
+protocol ViewPresentable {
+    init(view: PresenterView, model: Model)
+    func setLabelUI()
+    func setButtonUI()
+}
+
+class Presenter: ViewPresentable {
+    weak var view: PresenterView?
+    var model: Model
+    
+    required init(view: PresenterView, model: Model) {
+        self.view = view
+        self.model = model
+    }
+    
+    func setLabelUI() {
+        view?.setLabelUI(model.data)
+    }
+    
+    func setButtonUI() {
+        view?.setButtonUI(model.value)
+    }
+    
+}
+
+
+
+
+
+class ViewController: UIViewController, PresenterView {
+
+    //MARK: Property
+    var backgroundView: UIView = {
+        $0.backgroundColor = .white
+        return $0
+    }(UIView())
+    
+    var label: UILabel = {
+        $0.text = "MVP"
+        $0.frame = CGRect(x: 200, y: 150, width: 400, height: 20)
+        $0.textColor = .black
+        return $0
+        
+    }(UILabel())
+    
+    var button: UIButton = {
+        $0.setTitle("set Label UI", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.frame = CGRect(x: 100, y: 250, width: 100, height: 30)
+        $0.addTarget(self, action: #selector(didTapSetLabelAction), for: .touchUpInside)
+        return $0
+    }(UIButton())
+    
+    var button2: UIButton = {
+        $0.setTitle("set Button UI", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.frame = CGRect(x: 100, y: 300, width: 150, height: 30)
+        $0.addTarget(self, action: #selector(didTapSetButtonAction), for: .touchUpInside)
+        
+        return $0
+    }(UIButton())
+    
+    
+    var presenter: Presenter?
+    var model: Model = Model(data: "Label Data", value: "Button Data")
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        getUI()
+    }
+    
+    
+    private func getUI() {
+        view.addSubview(backgroundView)
+        view.addSubview(label)
+        view.addSubview(button)
+        view.addSubview(button2)
+        presenter = Presenter(view: self, model: model)
+        backgroundView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+    }
+    
+    
+    func setButtonUI(_ text: String) {
+        self.button.setTitle(text, for: .normal)
+    }
+    
+    func setLabelUI(_ label: String) {
+        self.label.text = label
+    }
+    
+
+    
+    @objc func didTapSetLabelAction() {
+        presenter?.setLabelUI()
+    }
+    
+    @objc func didTapSetButtonAction() {
+        presenter?.setButtonUI()
+    }
+
+
+}
+```
+
