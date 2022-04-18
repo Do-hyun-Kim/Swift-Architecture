@@ -416,6 +416,115 @@ func doSomeThing(button: LongTapGestureProtocol & TapGestureProtocol) {
 }
 ```
 
+
+<h2>DIP(Dependency Inversion Principle)의존관계 역전 원칙</h2>
+
+  - 상위 레벨 모듈은 하위레벨 모듈에 의존하면 안된다.
+  - 두 모듈은 추상화된 인터페이스(프로토콜)에 의존해야 한다.
+  - 추상화된 것은 구체적인 것에 의존하면 안되고, 구체적인 것이 추상화된 것에 의존해야 한다.
+  - 의존 관계를 맺을때 변화 하기 쉬운 것 또는 자주 변화하는 것(클래스) 보다는 변화하기 어렵거나 거의 변화가 없는 것(인터페이스)에 의존해야 한다.
+  - 하위레벨 모듈이 상웨레벨 모듈을 참조하는 것은 되지만 상위레벨 모듈이 하위레벨 모듈을 참조하는 것은 안 하는게 좋다. 그런 경우는 제네릭이나 Associate(연관타입)을 사용
+  - DIP를 만족하면 DI(의존성 주입) 기술로 변화를 쉽게 수용할 수 있다.
+
+<br>
+
+  - Before : 변화하기 쉬운 모듈(클래스)에 의존하였다. 
+
+```swift
+class Macbook {
+    func switchOn() {
+        print("전원 켜기")
+    }
+}
+
+
+class Developer {
+    let developer: Developer = Developer()
+    
+    func startDevelop() {
+        developer.startDevelop()
+    }
+}
+```
+<br>
+
+  - After : 하위레벨 모듈들이 상위레벨 모듈(추상화된 프로토콜)을 의존하고 있고, 상위레벨 모듈은 변화가 거의 없는 모듈이다.
+
+```swift
+protocol NoteBook {
+    func switchOn()
+}
+
+class iOSDeveloper {
+    let noteBook: NoteBook
+    
+    init(noteBook: NoteBook) {
+        self.noteBook = noteBook
+    }
+    
+    func startDevelop() {
+        noteBook.switchOn()
+    }
+}
+
+class SamSung: NoteBook {
+    func switchOn() {}
+}
+
+class Apple: NoteBook {
+    func switchOn() {}
+}
+
+class Lenovo: NoteBook {
+    func switchOn() {}
+}
+
+
+
+//MARK: associatetype을 활용해서 상위레벨 모듈에서 하위레벨 모듈의 의존을 끊었다. 하위레벨 모듈에서 takCoffee 메소드에 인자를 넣을 때 원하는 타입을 넣으면 된다.
+
+
+protocol Coffee {
+    func orderCoffee()
+    func drinkCoffee()
+    func takeCoffee(type: CoffeeType)
+    associatedtype CoffeeType
+}
+
+
+class Americano: Coffee {
+    
+    func orderCoffee() {
+        print("아메리카노 하나")
+    }
+    
+    func takeCoffee(type: Americano) {
+        type.drinkCoffee()
+    }
+    
+    func drinkCoffee() {
+        print("아메리카노 마시다.")
+    }
+}
+
+
+class Latte: Coffee {
+    
+    func orderCoffee() {
+        print("라떼 하나")
+    }
+    
+    func takeCoffee(type: Latte) {
+        type.drinkCoffee()
+    }
+    
+    func drinkCoffee() {
+        print("라떼 마시다.")
+    }
+}
+
+```
+
 - <H3>MVP</H3>
 
 ```swift
