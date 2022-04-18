@@ -42,6 +42,8 @@ class Hanlder {
 }
 ```
 <br>
+
+
   - After : 하나의 클래스가 하나의 책임을 가지고 있다. Handler 클래스의 경우는 협력 관계(Collaboration)인 여러 클래스를 활용하여 하나의 책임을 가지고 있다.
 
 ```swift
@@ -78,6 +80,179 @@ class APIHandler {
     
 }
 ```
+
+<h2>OCP(Open-Closed Principle) 개방, 폐쇠 원칙</h2>
+
+  - 어떤 기능을 추가할때 기존의 코드는 만지지 않고 새로 동작하는 기능에 대해서만 코드가 작성 되어야 한다.
+  - 확장에는 열려 있으나 변경에는 닫혀 있어야 한다.(기능 케이스를 추가할 때 기존 코드를 변경하지 않고 확장해야 한다.)
+  - 객체가 변경될 때는 해당 객체만 바꿔도 동작이 잘되면 OCP를 잘지킨 것이고, 바꿔야 할 것이 많으면 OCP를 잘 안 지킨 것 이다.
+  - 모듈이 주변 환경에 지나치게 의존 하면 안된다.<br><br>
+
+
+  - Before : Country 열거형에 case를 추가하면 printNameOfCountry 함수도 수정해야 한다. 결합도와 의존성이 높고, 유지보수가 힘들다.
+
+```swift
+enum Country {
+    case korea
+    case china
+    case japan
+}
+
+
+class Flag {
+    let country: Country
+    
+    init(country: Country) {
+        self.country = country
+    }
+    
+}
+
+func printNameOfCountry(flag: Flag) {
+    switch flag.country {
+    case .china:
+        print("중국")
+    case .korea:
+        print("한국")
+    case .japan:
+        print("일본")
+    }
+}
+
+enum HyunCountry {
+    case korea
+    case china
+    case japan
+    case usa
+    
+    
+    var name: String {
+        switch self {
+        case .korea:
+            return "한국"
+        case .china:
+            return "중국"
+        case .japan:
+            return "일본"
+        case .usa:
+            return "미국"
+        }
+    }
+}
+
+
+class HyunFlag {
+    let country: HyunCountry
+    
+    init(country: HyunCountry) {
+        self.country = country
+    }
+}
+
+func printNameOfHyunCountry(country: HyunCountry) {
+    print(country.name)
+}
+
+
+//MARK: Before
+//MARK: 새로운 동물 Class를 생성 해줄때마다 Zoo에 코드를 추가해주어야 하기 때문에 폐쇠 적이지 못하다.
+class Dog {
+    func makeSound() {
+        print("멍멍")
+    }
+}
+
+class Cat {
+    func makeSound() {
+        print("야옹")
+    }
+}
+
+
+class Zoo {
+    var dogs: [Dog] = [Dog(),Dog(),Dog()]
+    var cats: [Cat] = [Cat(),Cat(),Cat()]
+    
+    func makeAllSounds() {
+        dogs.forEach {
+            $0.makeSound()
+        }
+        cats.forEach {
+            $0.makeSound()
+        }
+    }
+}
+
+
+var hyunZoo: Zoo = Zoo()
+hyunZoo.makeAllSounds()
+
+```
+<br>
+
+  - After : 도시를 추가하고 싶다면 Countrable을 채택하는 구조체를 생성 하기만 하면 된다. 결합도가 낮고 응집도가 높아 유지보수가 용이하다. -> 버그가 일어 나지 않는다.
+
+```swift
+protocol Countrable {
+    var name: String { get }
+}
+
+struct Korea: Countrable {
+    let name: String = "한국"
+}
+
+struct Japan: Countrable {
+    let name: String = "일본"
+}
+
+struct China: Countrable {
+    let name: String = "중국"
+}
+
+class SolidCountry {
+    let country: Countrable
+    
+    init(country: Countrable) {
+        self.country = country
+    }
+}
+
+func printNameOfCountrable(country: Countrable) {
+    print(country.name)
+}
+
+//MARK: After
+
+protocol Animal {
+    func makeSound()
+}
+
+class Pig: Animal {
+    func makeSound() {
+        print("꿀꿀")
+    }
+}
+
+class Bird: Animal {
+    func makeSound() {
+        print("짹짹")
+    }
+}
+
+
+class HyunZoo {
+    var animals: [Animal] = []
+    
+    func makeAllSounds() {
+        animals.forEach {
+            $0.makeSound()
+        }
+    }
+}
+
+
+```
+
 - <H3>MVP</H3>
 
 ```swift
