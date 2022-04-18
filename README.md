@@ -338,6 +338,84 @@ class HyunSquare: Shape {
 }
 ```
 
+<h2>ISP(Interface Segregation Principle) 인터페이스 분리 원칙</h2>
+
+  - 클래스 내에 사용하지 않는 인터페이스는 구현하지 말아야 한다.
+  - 클라이언트 객체는 사용하지 않는 메소드에 의존하지 말아야 한다.
+  - 인터페이스가 거대해지는 경우 SRP(단일 책임 원칙)을 어기는 경우가 생길 수 있고, 해당 인터페이스를 채택해서 사용하는 경우 쓰지 않는 메소드가 있어도 넣어야 하는 경우가 발생할 수 있으니 최대한 인터페이스를 분리하는 것을 권장
+
+  - Before
+```swift
+protocol GeneralProtocol {
+    func didTap()
+    func didLongTap()
+    func didMultiTap()
+}
+
+class GestureButton: GeneralProtocol {
+    
+    func didTap() {}
+    
+    func didLongTap() {}
+    
+    func didMultiTap() {}
+}
+
+//MARK: DoubleButton Class에 didTap, didLongTap의 사용하지 않는 메소드 까지 구현되어 있다.
+class DoubleButton: GeneralProtocol {
+    
+    func didMultiTap() {
+        
+    }
+    
+    //MARK: Useless
+    func didTap() {
+        <#code#>
+    }
+    
+    func didLongTap() {
+        <#code#>
+    }
+}
+```
+<br>
+
+  - After : 프로토콜을 분리함으로써 필요한 프로토콜만 채택하게되어 사용하지 않는 메소드가 없어졌다.
+```swift
+protocol TapGestureProtocol {
+    func didTap()
+}
+
+protocol LongTapGestureProtocol {
+    func didLongTap()
+}
+
+protocol MultiTapGestureProtocol {
+    func didMultiTap()
+}
+
+
+class HyunGestureButton: TapGestureProtocol, LongTapGestureProtocol, MultiTapGestureProtocol {
+    func didTap() {}
+    func didLongTap() {}
+    func didMultiTap() {}
+}
+
+class MultiTapGestureButton: MultiTapGestureProtocol {
+    func didMultiTap() {}
+}
+
+class LongTapGestureButton: LongTapGestureProtocol, TapGestureProtocol {
+    func didTap() {}
+    func didLongTap() {}
+}
+
+func doSomeThing(button: LongTapGestureProtocol & TapGestureProtocol) {
+    button.didTap()
+    button.didLongTap()
+}
+```
+
 - <H3>MVP</H3>
 
 ```swift
