@@ -253,6 +253,91 @@ class HyunZoo {
 
 ```
 
+<h2>LSP(Liskov Substitution Principle) 리스코프 치환 원칙</h2>
+
+  - 서브타입(자식 클래스)은 상속 받은(기본 타입)으로 대체 가능 해야한다
+  - 자식 클래스는 부모 클래스의 동작(의미)를 바꾸지 않는다.
+  - 상속을 사용했을 때 서브클래스는 자신의 슈퍼 클래스 대신 사용되도 같은 동작을 해야한다.
+
+<br>
+
+  - Before
+
+
+```swift
+class Rectangle {
+    var width: Float = 0
+    var height: Float = 0
+    
+    var area: Float {
+        return width * height
+    }
+}
+
+
+class Square: Rectangle {
+    override var width: Float {
+        didSet {
+            height = width
+        }
+    }
+}
+
+
+
+func printArea(of rectangle: Rectangle) {
+    rectangle.height = 5
+    rectangle.width = 2
+    print(rectangle.area)
+}
+
+
+let hyunRectAngle = Rectangle()
+printArea(of: hyunRectAngle)
+
+
+let Hyunsquare = Square()
+printArea(of: Hyunsquare)
+```
+<br>
+
+  - After
+
+
+```swift
+protocol Shape {
+    var area: CGFloat { get }
+}
+
+class HyunRectAngle: Shape {
+    private let width: CGFloat
+    private let height: CGFloat
+    
+    var area: CGFloat {
+        return width * height
+    }
+    
+    init(width: CGFloat, height: CGFloat) {
+        self.width = width
+        self.height = height
+    }
+    
+    
+}
+
+class HyunSquare: Shape {
+    private let length: CGFloat
+    
+    var area: CGFloat {
+        return length * length
+    }
+    
+    init(length: CGFloat) {
+        self.length = length
+    }
+}
+```
+
 - <H3>MVP</H3>
 
 ```swift
