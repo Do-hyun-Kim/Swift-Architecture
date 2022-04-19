@@ -588,6 +588,69 @@ class Bank {
 }
 ```
 
+<h2>Injection(주입)</h2>
+
+  - 내부가 아닌 외부에서 객체를 생성하여 넣어주는 것을 주입 이라한다.<br>
+
+```swift
+class Phone {
+    var number: Int
+    
+    init(number: Int) {
+        self.number = number
+    }
+    
+    func printNumber(number: Int) {
+        print("Hyun Phone Number")
+    }
+}
+
+var hyunPhone: Phone = Phone(number: Int(3))
+hyunPhone.printNumber(number: Int(5)) //외부 에서 객체를 생성하여 넣어준다.
+```
+<br>
+
+<h2>의존성 주입(Dependency Injection)</h2>
+
+  - Unit Test가 용이 해진다.
+  - 코드의 재활용성을 높여준다.
+  - 객체 간의 의존성(종속성)을 줄이거나 없앨 수 있다.
+  - 객체 간의 결합도를 낮추면서 유연한 코드를 작성할 수 있다.
+<br>
+
+
+  - Before : 아래와 같이 코드를 구현하면 외부로 부터 객체를 생성하여 주입을 하고 있으며, Flower 객체를 참조하고 있기에 의존성을 갖고 있지만, DIP(Dependency Inversion Principle) 의존 관계 역전 법칙에 어긋난다. 의존 관계 역전 법칙은 상위 모듈이 하위 모듈에 대해 의존해서는 안되며, 항상 구체적인 객체는 추상화(Protocol)된 객체에만 의존해야 한다.
+
+<br>
+
+
+```swift
+class Flower {
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
+
+class FlowerHouse {
+    var hyunFlower: Flower
+    
+    init(hyunFlower: Flower) {
+        self.hyunFlower = hyunFlower
+    }
+    
+    func printFlowerName() {
+        print(hyunFlower.name)
+    }
+}
+
+let myFlower = FlowerHouse(hyunFlower: Flower(name: "라벤더"))
+myFlower.printFlowerName()
+
+```
+
 
 
 - <H3>MVP</H3>
