@@ -525,6 +525,71 @@ class Latte: Coffee {
 
 ```
 
+
+<h2>Dependency(의존성)</h2>
+
+  - 객체 지향 프로그래밍에서 Dependency 의존성은 서로 다른 객체 사이에 의존 관계가 있다는 것을 말한다, 즉 의존하는 객체가 수정되면, 다른 객체도 영향을 받는다는 것이다.
+  - 의존성을 가지는 코드가 많아진다면, 재활용성이 떨어지고 매번 의존성을 가지는 객체들을 함께 수정해 주어야 한다는 문제가 발생 한다.
+  - 이러한 의존성을 해결하기 위해 나온 개념이 바로 Dependency Injection(의존성 주입) 이다.<br>
+<br>
+
+
+  - Example : Person 객체는 Order 객체를 인스턴스로 사용하고 있으며, Order객체에 의존이 생긴다. 만약 이때 Order객체에 중요한 수정이나 오류가 발생한다면, Person 객체도 영향을 받는다.
+```swift
+struct Order {
+    
+    func coffeeOrder() {
+        print("Coffee 주문")
+    }
+    
+    func foodOrder() {
+        print("Food 주문")
+    }
+}
+
+struct Person {
+    var hyun: Order
+    
+    func latte() {
+        hyun.coffeeOrder()
+    }
+    
+    func rice() {
+        hyun.foodOrder()
+    }
+}
+
+
+class Wallet {
+    
+    func sendMoney() {
+        print("5000원 보낼께!!")
+    }
+    
+    func receiveMoney() {
+        print("5000원 받았어!!")
+    }
+}
+
+class Bank {
+    var myWallet: Wallet
+    
+    init(myWallet: Wallet) {
+        self.myWallet = myWallet
+    }
+    
+    func bankDeposit() {
+        myWallet.sendMoney()
+    }
+    
+    func myBankCheck() {
+        myWallet.receiveMoney()
+    }
+}
+```
+
+
+
 - <H3>MVP</H3>
 
 ```swift
