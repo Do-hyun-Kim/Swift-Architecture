@@ -16,7 +16,7 @@
 		FFF84D7F280FBF740097C732 /* Clean_Architecture_MVVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D7E280FBF740097C732 /* Clean_Architecture_MVVMTests.swift */; };
 		FFF84D89280FBF740097C732 /* Clean_Architecture_MVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D88280FBF740097C732 /* Clean_Architecture_MVVMUITests.swift */; };
 		FFF84D8B280FBF740097C732 /* Clean_Architecture_MVVMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D8A280FBF740097C732 /* Clean_Architecture_MVVMUITestsLaunchTests.swift */; };
-		FFF84DA1280FCAB10097C732 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84DA0280FCAB10097C732 /* User.swift */; };
+		FFF84DA1280FCAB10097C732 /* Adress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84DA0280FCAB10097C732 /* Adress.swift */; };
 		FFF84DA4280FD2180097C732 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FFF84DA3280FD2180097C732 /* Alamofire */; };
 		FFF84DA6280FD6520097C732 /* AdressSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84DA5280FD6520097C732 /* AdressSearchUseCase.swift */; };
 		FFF84DAA280FD98C0097C732 /* AdressAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84DA9280FD98C0097C732 /* AdressAPI.swift */; };
@@ -53,7 +53,7 @@
 		FFF84D84280FBF740097C732 /* Clean-Architecture-MVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Clean-Architecture-MVVMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF84D88280FBF740097C732 /* Clean_Architecture_MVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clean_Architecture_MVVMUITests.swift; sourceTree = "<group>"; };
 		FFF84D8A280FBF740097C732 /* Clean_Architecture_MVVMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clean_Architecture_MVVMUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		FFF84DA0280FCAB10097C732 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FFF84DA0280FCAB10097C732 /* Adress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adress.swift; sourceTree = "<group>"; };
 		FFF84DA5280FD6520097C732 /* AdressSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressSearchUseCase.swift; sourceTree = "<group>"; };
 		FFF84DA9280FD98C0097C732 /* AdressAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,7 +150,7 @@
 		FFF84D98280FC52E0097C732 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				FFF84DA0280FCAB10097C732 /* User.swift */,
+				FFF84DA0280FCAB10097C732 /* Adress.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -323,7 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFF84DA1280FCAB10097C732 /* User.swift in Sources */,
+				FFF84DA1280FCAB10097C732 /* Adress.swift in Sources */,
 				FFF84D6C280FBF710097C732 /* ViewController.swift in Sources */,
 				FFF84DAA280FD98C0097C732 /* AdressAPI.swift in Sources */,
 				FFF84DA6280FD6520097C732 /* AdressSearchUseCase.swift in Sources */,
