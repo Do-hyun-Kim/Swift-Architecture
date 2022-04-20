@@ -16,6 +16,10 @@
 		FFF84D7F280FBF740097C732 /* Clean_Architecture_MVVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D7E280FBF740097C732 /* Clean_Architecture_MVVMTests.swift */; };
 		FFF84D89280FBF740097C732 /* Clean_Architecture_MVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D88280FBF740097C732 /* Clean_Architecture_MVVMUITests.swift */; };
 		FFF84D8B280FBF740097C732 /* Clean_Architecture_MVVMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D8A280FBF740097C732 /* Clean_Architecture_MVVMUITestsLaunchTests.swift */; };
+		FFF84DA1280FCAB10097C732 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84DA0280FCAB10097C732 /* User.swift */; };
+		FFF84DA4280FD2180097C732 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FFF84DA3280FD2180097C732 /* Alamofire */; };
+		FFF84DA6280FD6520097C732 /* AdressSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84DA5280FD6520097C732 /* AdressSearchUseCase.swift */; };
+		FFF84DAA280FD98C0097C732 /* AdressAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84DA9280FD98C0097C732 /* AdressAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,9 @@
 		FFF84D84280FBF740097C732 /* Clean-Architecture-MVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Clean-Architecture-MVVMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF84D88280FBF740097C732 /* Clean_Architecture_MVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clean_Architecture_MVVMUITests.swift; sourceTree = "<group>"; };
 		FFF84D8A280FBF740097C732 /* Clean_Architecture_MVVMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clean_Architecture_MVVMUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FFF84DA0280FCAB10097C732 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FFF84DA5280FD6520097C732 /* AdressSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressSearchUseCase.swift; sourceTree = "<group>"; };
+		FFF84DA9280FD98C0097C732 /* AdressAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFF84DA4280FD2180097C732 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +107,8 @@
 		FFF84D66280FBF710097C732 /* Clean-Architecture-MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				FFF84DA7280FD9290097C732 /* Infrastructure */,
+				FFF84D97280FC5120097C732 /* Domain */,
 				FFF84D67280FBF710097C732 /* AppDelegate.swift */,
 				FFF84D69280FBF710097C732 /* SceneDelegate.swift */,
 				FFF84D6B280FBF710097C732 /* ViewController.swift */,
@@ -127,6 +137,55 @@
 			path = "Clean-Architecture-MVVMUITests";
 			sourceTree = "<group>";
 		};
+		FFF84D97280FC5120097C732 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				FFF84D98280FC52E0097C732 /* Entities */,
+				FFF84D99280FC5400097C732 /* UseCases */,
+				FFF84D9A280FC55D0097C732 /* Interfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		FFF84D98280FC52E0097C732 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				FFF84DA0280FCAB10097C732 /* User.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		FFF84D99280FC5400097C732 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				FFF84DA5280FD6520097C732 /* AdressSearchUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		FFF84D9A280FC55D0097C732 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		FFF84DA7280FD9290097C732 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				FFF84DA8280FD9410097C732 /* Network */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		FFF84DA8280FD9410097C732 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FFF84DA9280FD98C0097C732 /* AdressAPI.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +202,9 @@
 			dependencies = (
 			);
 			name = "Clean-Architecture-MVVM";
+			packageProductDependencies = (
+				FFF84DA3280FD2180097C732 /* Alamofire */,
+			);
 			productName = "Clean-Architecture-MVVM";
 			productReference = FFF84D64280FBF710097C732 /* Clean-Architecture-MVVM.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +277,9 @@
 				Base,
 			);
 			mainGroup = FFF84D5B280FBF700097C732;
+			packageReferences = (
+				FFF84DA2280FD2180097C732 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = FFF84D65280FBF710097C732 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -258,7 +323,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFF84DA1280FCAB10097C732 /* User.swift in Sources */,
 				FFF84D6C280FBF710097C732 /* ViewController.swift in Sources */,
+				FFF84DAA280FD98C0097C732 /* AdressAPI.swift in Sources */,
+				FFF84DA6280FD6520097C732 /* AdressSearchUseCase.swift in Sources */,
 				FFF84D68280FBF710097C732 /* AppDelegate.swift in Sources */,
 				FFF84D6A280FBF710097C732 /* SceneDelegate.swift in Sources */,
 			);
@@ -624,6 +692,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FFF84DA2280FD2180097C732 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FFF84DA3280FD2180097C732 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFF84DA2280FD2180097C732 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FFF84D5C280FBF700097C732 /* Project object */;
 }
