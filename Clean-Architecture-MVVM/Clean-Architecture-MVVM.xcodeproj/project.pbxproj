@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FFAFBE78281951F600DCE4E5 /* AdressNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFBE77281951F600DCE4E5 /* AdressNetworkRepository.swift */; };
+		FFAFBE80281A9D0200DCE4E5 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFBE7F281A9D0200DCE4E5 /* SearchViewModel.swift */; };
+		FFAFBE84281A9E5A00DCE4E5 /* SearchAPILayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFBE83281A9E5A00DCE4E5 /* SearchAPILayer.swift */; };
 		FFF84D68280FBF710097C732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D67280FBF710097C732 /* AppDelegate.swift */; };
 		FFF84D6A280FBF710097C732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D69280FBF710097C732 /* SceneDelegate.swift */; };
 		FFF84D6C280FBF710097C732 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D6B280FBF710097C732 /* ViewController.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FFAFBE77281951F600DCE4E5 /* AdressNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressNetworkRepository.swift; sourceTree = "<group>"; };
+		FFAFBE7F281A9D0200DCE4E5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		FFAFBE83281A9E5A00DCE4E5 /* SearchAPILayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPILayer.swift; sourceTree = "<group>"; };
 		FFF84D64280FBF710097C732 /* Clean-Architecture-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clean-Architecture-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF84D67280FBF710097C732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFF84D69280FBF710097C732 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +90,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FFAFBE76281951C800DCE4E5 /* Repositorys */ = {
+			isa = PBXGroup;
+			children = (
+				FFAFBE77281951F600DCE4E5 /* AdressNetworkRepository.swift */,
+			);
+			path = Repositorys;
+			sourceTree = "<group>";
+		};
+		FFAFBE7D281A9CE400DCE4E5 /* Applications */ = {
+			isa = PBXGroup;
+			children = (
+				FFAFBE7E281A9CF000DCE4E5 /* ViewModel */,
+			);
+			path = Applications;
+			sourceTree = "<group>";
+		};
+		FFAFBE7E281A9CF000DCE4E5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FFAFBE7F281A9D0200DCE4E5 /* SearchViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FFAFBE81281A9E3B00DCE4E5 /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				FFAFBE82281A9E4200DCE4E5 /* NetworkLayer */,
+			);
+			path = Layer;
+			sourceTree = "<group>";
+		};
+		FFAFBE82281A9E4200DCE4E5 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				FFAFBE83281A9E5A00DCE4E5 /* SearchAPILayer.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
 		FFF84D5B280FBF700097C732 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +153,7 @@
 		FFF84D66280FBF710097C732 /* Clean-Architecture-MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				FFAFBE7D281A9CE400DCE4E5 /* Applications */,
 				FFF84DA7280FD9290097C732 /* Infrastructure */,
 				FFF84D97280FC5120097C732 /* Domain */,
 				FFF84D67280FBF710097C732 /* AppDelegate.swift */,
@@ -159,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				FFF84DA5280FD6520097C732 /* AdressSearchUseCase.swift */,
+				FFAFBE76281951C800DCE4E5 /* Repositorys */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -181,6 +229,7 @@
 		FFF84DA8280FD9410097C732 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				FFAFBE81281A9E3B00DCE4E5 /* Layer */,
 				FFF84DA9280FD98C0097C732 /* AdressAPI.swift */,
 			);
 			path = Network;
@@ -325,10 +374,13 @@
 			files = (
 				FFF84DA1280FCAB10097C732 /* Adress.swift in Sources */,
 				FFF84D6C280FBF710097C732 /* ViewController.swift in Sources */,
+				FFAFBE80281A9D0200DCE4E5 /* SearchViewModel.swift in Sources */,
 				FFF84DAA280FD98C0097C732 /* AdressAPI.swift in Sources */,
+				FFAFBE78281951F600DCE4E5 /* AdressNetworkRepository.swift in Sources */,
 				FFF84DA6280FD6520097C732 /* AdressSearchUseCase.swift in Sources */,
 				FFF84D68280FBF710097C732 /* AppDelegate.swift in Sources */,
 				FFF84D6A280FBF710097C732 /* SceneDelegate.swift in Sources */,
+				FFAFBE84281A9E5A00DCE4E5 /* SearchAPILayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

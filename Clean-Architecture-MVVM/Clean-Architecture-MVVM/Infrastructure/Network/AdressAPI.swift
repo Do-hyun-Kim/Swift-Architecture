@@ -13,14 +13,13 @@ protocol DefaulAPI: URLRequestConvertible {
     static var baseURL: String {get}
     var method: HTTPMethod {get}
     var parameters: Parameters {get}
-    var headers: HTTPHeaders {get}
     var parameterEncode: ParameterEncoding { get }
 }
 
 enum AdressRouter: DefaulAPI {
     case getAdress(String, String, String, String, String)
     
-    static let baseURL: String = "http://www.juso.go.kr/addrlink/addrLinkApiJsonp.do"
+    static let baseURL: String = "https://www.juso.go.kr/addrlink/addrLinkApi.do"
     
     
     var method: HTTPMethod {
@@ -32,21 +31,16 @@ enum AdressRouter: DefaulAPI {
     
     var parameters: Parameters {
         switch self {
-        case .getAdress(let confmKey, let currentPage, let countPerPage, let resultType, let keyword):
+        case .getAdress(let confmKey, let keyword, let countPerPage, let currentPage, let resultType):
             return ["confmKey":confmKey,
+                    "keyword":keyword,
+                    "countPerPage":countPerPage,
                     "currentPage":currentPage,
-                    "countPerPage":countPerPage, "resultType": resultType, "keyword": keyword
+                     "resultType": resultType
             ]
         }
     }
-    
-    var headers: HTTPHeaders {
-        switch self {
-        case .getAdress:
-            return ["Content-Type":"application/json"]
-        }
-    }
-    
+        
     var parameterEncode: ParameterEncoding {
         switch self {
         case .getAdress:
@@ -56,7 +50,7 @@ enum AdressRouter: DefaulAPI {
     
     public func asURLRequest() throws -> URLRequest {
         let url = try AdressRouter.baseURL.asURL()
-        let urlRequest = try URLRequest(url: url, method: method, headers: headers)
+        let urlRequest = try URLRequest(url: url, method: method)
     
 
         return urlRequest
@@ -68,25 +62,4 @@ enum AdressRouter: DefaulAPI {
 
 protocol AdressAPI {
     func getAdress(requestValue: RequestValue, completion: @escaping (Result<Adress, Error>) -> Void)
-}
-
-extension AdressAPI {
-    public func getAdress(requestValue: RequestValue, completion: @escaping (Result<Adress, Error>) -> Void) {
-        AF.request(AdressRouter.getAdress(requestValue.confmKey, requestValue.currentPage, requestValue.countPerPage, requestValue.resultType, requestValue.keyword))
-            .validate(statusCode: 200...300)
-            .responseDecodable { (response: AFDataResponse<Adress>) in
-                switch response.result {
-                case .success:
-                    guard let data = response.value else { return }
-                    print(" Value : \(response.value)")
-                    completion(.success(data))
-                case .failure(let errorCode):
-                    print(" Error code \(errorCode)")
-                    completion(.failure(errorCode))
-                }
-                
-            }
-            
-    }
-    
 }
