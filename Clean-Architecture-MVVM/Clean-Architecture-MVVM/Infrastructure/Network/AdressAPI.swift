@@ -9,14 +9,14 @@ import Foundation
 import Alamofire
 
 
-protocol DefaulAPI: URLRequestConvertible {
+protocol DefaultAPI: URLRequestConvertible {
     static var baseURL: String {get}
     var method: HTTPMethod {get}
-    var parameters: Parameters {get}
+    var parameters: Parameters? {get}
     var parameterEncode: ParameterEncoding { get }
 }
 
-enum AdressRouter: DefaulAPI {
+enum AdressRouter: DefaultAPI {
     case getAdress(String, String, String, String, String)
     
     static let baseURL: String = "https://www.juso.go.kr/addrlink/addrLinkApi.do"
@@ -29,7 +29,7 @@ enum AdressRouter: DefaulAPI {
         }
     }
     
-    var parameters: Parameters {
+    var parameters: Parameters? {
         switch self {
         case .getAdress(let confmKey, let keyword, let countPerPage, let currentPage, let resultType):
             return ["confmKey":confmKey,
@@ -51,15 +51,17 @@ enum AdressRouter: DefaulAPI {
     public func asURLRequest() throws -> URLRequest {
         let url = try AdressRouter.baseURL.asURL()
         let urlRequest = try URLRequest(url: url, method: method)
-    
-
-        return urlRequest
         
+        if let parameters = parameters {
+            return try parameterEncode.encode(urlRequest, with: parameters)
+        }
+    
+        return urlRequest
     }
     
 }
 
 
 protocol AdressAPI {
-    func getAdress(requestValue: RequestValue, completion: @escaping (Result<Adress, Error>) -> Void)
+    func getAdress(completion: @escaping (Result<Adress, Error>) -> Void)
 }

@@ -26,9 +26,12 @@ final class DefaultAdressSearchUseCase: AdressSearchUseCase {
     
     
     func excute(request: RequestValue, completion: @escaping (Result<Adress, Error>) -> Void) {
-        return adressNetworkLayer.getAdress(requestValue: request) { result in
-            if case .success = result {
-                completion(result)
+        return adressRepository.fetchSearchAdress(requestValue: request) { result in
+            switch result {
+            case .success(let value):
+                completion(.success(value))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
@@ -39,9 +42,9 @@ final class DefaultAdressSearchUseCase: AdressSearchUseCase {
 
 struct RequestValue {
     var confmKey: String
-    var currentPage: String
-    var countPerPage: String
     var keyword: String
+    var countPerPage: String
+    var currentPage: String
     var resultType: String
 }
 

@@ -8,47 +8,47 @@
 import XCTest
 @testable import Clean_Architecture_MVVM
 
-class NetworkLayerMock: AdressAPI {
-    
-}
-
-
-class AdressRepository: AdressNetworkRepository {
-    var recentQueries: Adress = Adress()
-    
-    func fetchSearchAdress(requestValue: RequestValue, completion: @escaping (Result<Adress, Error>) -> Void) {
-        completion(.success(recentQueries))
-    }
-}
-
 
 
 class Clean_Architecture_MVVMTests: XCTestCase {
-    var networkTest: DefaultAdressSearchUseCase?
-    lazy var repository: AdressRepository = AdressRepository()
-    lazy var networkLayerMock: NetworkLayerMock = NetworkLayerMock()
+    var searchViewModel: SearchViewModel?
+    var searchLayer: SearchAPILayer?
+    var requestValue: RequestValue?
     
     override func setUpWithError() throws {
-
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDownWithError() throws {
+        requestValue = nil
+        searchLayer = nil
+        searchViewModel = nil
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testExample() throws {
-        let requestExpectation = expectation(description: "Request should finish")
-        networkTest = DefaultAdressSearchUseCase.init(adressRepository: repository, adressNetworkLayer: networkLayerMock)
+        //given
+        requestValue = RequestValue(confmKey: "devU01TX0FVVEgyMDIyMDQyODE4NDMwMTExMjUxNTA=", keyword: "강남", countPerPage: "10", currentPage: "1", resultType: "json")
+        searchLayer = SearchAPILayer(requestValue: requestValue!)
+        searchViewModel = SearchViewModel(searchLayer: searchLayer!)
         
-        
-        let value = RequestValue(confmKey: "devU01TX0FVVEgyMDIyMDQyODE4NDMwMTExMjUxNTA=", currentPage: "1", countPerPage: "10", keyword: "강남", resultType: "json")
-        
-        networkTest?.excute(request: value, completion: { result in
-            XCTAssertNil(result)
+        //when
+        let requestExpectation = expectation(description: "Search Reqeust finish")
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let `self` = self else { return }
+            self.searchViewModel?.fetchSearchAdress(completion: { result in
+                switch result {
+                case .success(let value):
+                    XCTAssertNotNil(value)
+                case .failure(let error):
+                   XCTAssertThrowsError(error, "search Error")
+                }
+            })
             requestExpectation.fulfill()
-        })
-        waitForExpectations(timeout: 100.0, handler: nil)
+        }
+        
+        //then
+        wait(for: [requestExpectation], timeout: 82.0)
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
