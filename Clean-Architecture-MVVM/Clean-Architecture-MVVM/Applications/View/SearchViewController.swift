@@ -22,11 +22,23 @@ class SearchViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private var placeholderTitleLabel: UILabel = {
-        
-        
+    private var placeholderTitleTextView: UITextView = {
+        $0.text = """
+        tip\n
+        아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.\n
+        도로명 + 건물 번호 \n
+        예) 판교역로 235, 제주 첨단로 242\n
+        지역명(동/리) + 번지\n
+        예) 분당 주공, 연수동 주공 3차\n
+        사서 함명 + 번호\n
+        예) 분당 우체국사서함 1~100
+        """
+        $0.font = .systemFont(ofSize: 12)
+        $0.isEditable = false
+        $0.isScrollEnabled = false
+        $0.isSelectable = false
         return $0
-    }(UILabel())
+    }(UITextView())
     
     lazy var searchBar: AdressSearchBar = AdressSearchBar()
     
@@ -38,7 +50,14 @@ class SearchViewController: UIViewController {
     
     private func configure() {
         view.backgroundColor = .white
-        [adressTitleLabel,searchBar].forEach {
+        
+        let placeholderString = placeholderTitleTextView.text.components(separatedBy: "\n\n")
+        
+        print(placeholderString)
+        placeholderTitleTextView.attributedText = placeholderTitleTextView.searchAttributed(from:  [placeholderString[3],placeholderString[5],placeholderString[7]], adress: [placeholderString[1],placeholderString[2],placeholderString[4],placeholderString[6]], color: .systemBlue, font: .boldSystemFont(ofSize: 12))
+        
+        
+        [adressTitleLabel,searchBar, placeholderTitleTextView].forEach {
             view.addSubview($0)
         }
         
@@ -54,51 +73,13 @@ class SearchViewController: UIViewController {
             $0.right.equalToSuperview().offset(-10)
             $0.height.equalTo(80)
         }
-    }
-
-}
-
-
-
-
-final class AdressSearchBar: UIView, UISearchBarDelegate {
-    
-    //MARK: Property
-    public var searchBar: UISearchBar = {
-        $0.placeholder = "예) 판교역로 235 한남동 714"
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 4
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.layer.borderWidth = 0.1
         
-        return $0
-    }(UISearchBar())
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    public func configure() {
-        searchBar.delegate = self
-        if let textFiled = searchBar.value(forKey: "searchField") as? UITextField {
-            textFiled.attributedPlaceholder = NSAttributedString(string: textFiled.placeholder ?? "", attributes: [.font : UIFont.boldSystemFont(ofSize: 13)])
-            textFiled.textColor = .black
-            textFiled.backgroundColor = .white
-        }
-        addSubview(searchBar)
-        searchBar.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
+        placeholderTitleTextView.snp.makeConstraints {
+            $0.top.equalTo(searchBar.snp.bottom).offset(20)
+            $0.left.equalTo(searchBar).offset(10)
+            $0.right.equalTo(searchBar)
+            $0.height.equalTo(400)
         }
     }
-    
-    
+
 }
