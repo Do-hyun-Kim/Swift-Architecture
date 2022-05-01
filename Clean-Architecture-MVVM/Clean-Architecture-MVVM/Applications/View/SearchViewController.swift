@@ -40,7 +40,18 @@ class SearchViewController: UIViewController {
         return $0
     }(UITextView())
     
-    lazy var searchBar: AdressSearchBar = AdressSearchBar()
+    private let actionButton: UIButton = {
+        $0.setTitle("확인", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        $0.titleLabel?.textAlignment = .center
+        $0.addTarget(self, action: #selector(bindAction), for: .touchUpInside)
+        $0.backgroundColor = .systemTeal
+        return $0
+    }(UIButton())
+    
+    lazy var adressSearchBar: AdressSearchBar = AdressSearchBar()
+    private var searchViewModel: SearchViewModel?
     
     //MARK: LifeCycle
     override func viewDidLoad() {
@@ -53,11 +64,10 @@ class SearchViewController: UIViewController {
         
         let placeholderString = placeholderTitleTextView.text.components(separatedBy: "\n\n")
         
-        print(placeholderString)
         placeholderTitleTextView.attributedText = placeholderTitleTextView.searchAttributed(from:  [placeholderString[3],placeholderString[5],placeholderString[7]], adress: [placeholderString[1],placeholderString[2],placeholderString[4],placeholderString[6]], color: .systemBlue, font: .boldSystemFont(ofSize: 12))
         
         
-        [adressTitleLabel,searchBar, placeholderTitleTextView].forEach {
+        [adressTitleLabel,adressSearchBar, placeholderTitleTextView,actionButton].forEach {
             view.addSubview($0)
         }
         
@@ -67,19 +77,42 @@ class SearchViewController: UIViewController {
             $0.height.equalTo(40)
         }
         
-        searchBar.snp.makeConstraints {
+        adressSearchBar.snp.makeConstraints {
             $0.top.equalTo(adressTitleLabel.snp.bottom).offset(20)
             $0.left.equalToSuperview().offset(10)
-            $0.right.equalToSuperview().offset(-10)
             $0.height.equalTo(80)
         }
         
         placeholderTitleTextView.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(20)
-            $0.left.equalTo(searchBar).offset(10)
-            $0.right.equalTo(searchBar)
+            $0.top.equalTo(adressSearchBar.snp.bottom).offset(20)
+            $0.left.equalTo(adressSearchBar).offset(10)
+            $0.right.equalTo(adressSearchBar)
             $0.height.equalTo(400)
+        }
+        
+        actionButton.snp.makeConstraints {
+            $0.top.equalTo(adressSearchBar)
+            $0.left.equalTo(adressSearchBar.snp.right).offset(10)
+            $0.right.equalToSuperview().offset(-10)
+            $0.height.equalTo(adressSearchBar)
+            $0.width.equalTo(50)
         }
     }
 
+    
+    //MARK: Action
+    
+    @objc
+    private func bindAction() {
+        let requestValue: RequestValue = RequestValue(confmKey: "devU01TX0FVVEgyMDIyMDQyODE4NDMwMTExMjUxNTA=", keyword: adressSearchBar.searchBar.text!, countPerPage: "10", currentPage: "1", resultType: "json")
+        let searchLayer: SearchAPILayer = SearchAPILayer(requestValue: requestValue)
+        searchViewModel = SearchViewModel(searchLayer: searchLayer)
+        
+        searchViewModel?.fetchSearchAdress {
+            let detailVC = SearchDetailViewController(searchDetailViewModel: SearchDetailViewModel())
+            detailVC.searchDetailViewModel?.detailEntities = self.searchViewModel!.entities
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
+    
+    }
 }

@@ -20,10 +20,10 @@ final class SearchAPILayer: AdressAPI {
             .responseDecodable { (response: DataResponse<Adress, AFError>) in
                 switch response.result {
                 case .success(let value):
-                    print(" Success : Value | \(value)")
-                    debugPrint(value)
+                    completion(.success(value))
                 case .failure(let error):
                     debugPrint(error.localizedDescription)
+                    completion(.failure(error))
                 }
             }
         

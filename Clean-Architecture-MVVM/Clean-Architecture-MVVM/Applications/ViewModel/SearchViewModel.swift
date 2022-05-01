@@ -10,8 +10,8 @@ import Foundation
 
 final class SearchViewModel {
     
-    private let entities: Adress = Adress()
-    let searchLayer: SearchAPILayer
+    public var entities: Adress = Adress()
+    public var searchLayer: SearchAPILayer
     
     
     init(searchLayer: SearchAPILayer) {
@@ -19,16 +19,17 @@ final class SearchViewModel {
     }
     
     
-    public func fetchSearchAdress( completion: @escaping (Result<Adress,Error>) -> Void) {
+    public func fetchSearchAdress( completion: @escaping () -> Void) {
         return searchLayer
             .getAdress { result in
                 switch result {
                 case .success(let value):
-                    completion(.success(value))
+                    self.entities = value
+                    completion()
                 case .failure(let error):
-                    completion(.failure(error))
-                }
+                    print(error.localizedDescription)
             }
+        }
     }
     
 }

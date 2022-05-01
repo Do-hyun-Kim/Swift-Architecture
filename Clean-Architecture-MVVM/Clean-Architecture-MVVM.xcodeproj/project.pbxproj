@@ -16,6 +16,8 @@
 		FFAFBE8F281D329D00DCE4E5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FFAFBE8E281D329D00DCE4E5 /* SnapKit */; };
 		FFAFBE92281D50E900DCE4E5 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFBE91281D50E900DCE4E5 /* UITextView+Extension.swift */; };
 		FFAFBE95281D512B00DCE4E5 /* AdressSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFBE94281D512B00DCE4E5 /* AdressSearchBar.swift */; };
+		FFAFBED3281EA29B00DCE4E5 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFBED2281EA29B00DCE4E5 /* SearchDetailViewController.swift */; };
+		FFAFBED5281EA56400DCE4E5 /* SearchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFBED4281EA56400DCE4E5 /* SearchDetailViewModel.swift */; };
 		FFF84D68280FBF710097C732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D67280FBF710097C732 /* AppDelegate.swift */; };
 		FFF84D6A280FBF710097C732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D69280FBF710097C732 /* SceneDelegate.swift */; };
 		FFF84D6C280FBF710097C732 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF84D6B280FBF710097C732 /* SearchViewController.swift */; };
@@ -54,6 +56,8 @@
 		FFAFBE83281A9E5A00DCE4E5 /* SearchAPILayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPILayer.swift; sourceTree = "<group>"; };
 		FFAFBE91281D50E900DCE4E5 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		FFAFBE94281D512B00DCE4E5 /* AdressSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressSearchBar.swift; sourceTree = "<group>"; };
+		FFAFBED2281EA29B00DCE4E5 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
+		FFAFBED4281EA56400DCE4E5 /* SearchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewModel.swift; sourceTree = "<group>"; };
 		FFF84D64280FBF710097C732 /* Clean-Architecture-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clean-Architecture-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF84D67280FBF710097C732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFF84D69280FBF710097C732 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				FFAFBE7F281A9D0200DCE4E5 /* SearchViewModel.swift */,
+				FFAFBED4281EA56400DCE4E5 /* SearchDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				FFF84D6B280FBF710097C732 /* SearchViewController.swift */,
+				FFAFBED2281EA29B00DCE4E5 /* SearchDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -424,8 +430,10 @@
 				FFAFBE78281951F600DCE4E5 /* AdressNetworkRepository.swift in Sources */,
 				FFF84DA6280FD6520097C732 /* AdressSearchUseCase.swift in Sources */,
 				FFAFBE95281D512B00DCE4E5 /* AdressSearchBar.swift in Sources */,
+				FFAFBED5281EA56400DCE4E5 /* SearchDetailViewModel.swift in Sources */,
 				FFF84D68280FBF710097C732 /* AppDelegate.swift in Sources */,
 				FFF84D6A280FBF710097C732 /* SceneDelegate.swift in Sources */,
+				FFAFBED3281EA29B00DCE4E5 /* SearchDetailViewController.swift in Sources */,
 				FFAFBE84281A9E5A00DCE4E5 /* SearchAPILayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
